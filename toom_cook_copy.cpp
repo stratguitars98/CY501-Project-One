@@ -114,7 +114,7 @@ C++
 #include <stdio.h>   // for printf()
 //#define TEST      
 #define D_MAX 729  
-#define D     15  
+#define D     729  
 using namespace std;
 class Calc
 {
