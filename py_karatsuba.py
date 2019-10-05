@@ -78,7 +78,14 @@ def multiply(X, Y):
 
 
 if __name__ == "__main__":
-	num1 = input("Enter in a 64 bit number:\t")
-	num2 = input("Enter in another 64 bit number:\t")
+	print("This program supports multiplication through the karatsuba method")
+	print("Enter in two numbers up to 64 bits each. (Max value of 1.8446744e+19)")
+	num1 = input("Num1: ")
+	num2 = input("Num2: ")
+
+
+	num1 = bin(int(num1))[2:]
+	num2 = bin(int(num2))[2:]
+
 
 	print(multiply(num1, num2))
