@@ -5,59 +5,70 @@ def makeEqualLength(stringOne, stringTwo):
 	if(lenOne<lenTwo):
 		for i in range(lenTwo-lenOne):
 			stringOne = '0' + stringOne
-		return lenTwo
+		return (stringOne, stringTwo, lenTwo)
 	
 	elif(lenOne > lenTwo):
 		for i in range(lenOne-lenTwo):
 			stringTwo = '0' + stringTwo
 	
-	return lenOne
+	return (stringOne, stringTwo, lenOne)
 
 
 def addBitStrings(first, second):
 	result = ""
 
-	length = makeEqualLength(first, second)
+	first, second, length = makeEqualLength(first, second)
 	carry = 0
 
-	for i in range(length-1, -1):
-		firstBit = int(ord(first[i]) - ord('0'))
-		secondBit = int(ord(second[i]) - ord('0'))
-		print(firstBit, secondBit)
-		summation = int((firstBit^secondBit^carry) + '0')
+	for i in range((length-1), -1, -1):
+		firstBit = int(int(first[i]) - int('0'))
+		secondBit = int(int(second[i]) - int('0'))
+		#print(firstBit, secondBit)
+		summation = int((firstBit^secondBit^carry) + int('0'))
 
-		result = char(summation) + result
+		if(summation == 1):
+			result = '1' + result
+		else:
+			result = '0'+result
 
 		# this may cause an issue
 		carry = (firstBit&secondBit) | (secondBit&carry) | (firstBit&carry)
 
 	if carry == 1:
-		result = 1+result
+		result = '1'+result
 
 	return result
 
 
 def multiplySingleBit(a, b):
-	return(ord(a[0]) - ord('0'))*(ord(b[0]) - ord('0'))
+	a0 = int(a[0])
+	b0 = int(b[0])
+	r0 = int('0')
+	temp = (a0-r0)*(b0-r0)
+
+	#print('a[0]: {}\tb[0]: {}\t(a[0]-0)*(b[0]-0): {} '.format(a[0], b[0], temp))
+	return (temp)
 
 def multiply(X, Y):
-	n = makeEqualLength(X, Y)
-	print(n)
-
+	X, Y, n = makeEqualLength(X, Y)
+	#print("N:",n)
+	#print(X, Y, n)
 	if(n == 0): return 0
 	if(n == 1): return multiplySingleBit(X, Y)
 
 	fh = int(n/2)
-	print(fh)
+	#print(fh)
 	sh = (n - fh)
+	#print(sh)
 
 	Xl = X[:fh]
-	print(Xl)
-	Xr = X[fh:sh]
-	print(Xr)
-
+	#print("Xl", Xl)
+	Xr = X[-sh:]
+	#print("Xr", Xr)
 	Yl = Y[:fh]
-	Yr = Y[fh:sh]
+	#print("Yl", Yl)
+	Yr = Y[-sh:]
+	#print("Yr", Yr)
 
 	P1 = multiply(Xl, Yl)
 	P2 = multiply(Xr, Yr)
