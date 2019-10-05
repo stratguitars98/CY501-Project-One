@@ -3,7 +3,7 @@ def makeEqualLength(stringOne, stringTwo):
 	lenTwo = len(stringTwo)
 
 	if(lenOne<lenTwo):
-		for i in range(lenTwo-LenOne):
+		for i in range(lenTwo-lenOne):
 			stringOne = '0' + stringOne
 		return lenTwo
 	
@@ -23,7 +23,7 @@ def addBitStrings(first, second):
 	for i in range(length-1, -1):
 		firstBit = int(ord(first[i]) - ord('0'))
 		secondBit = int(ord(second[i]) - ord('0'))
-
+		print(firstBit, secondBit)
 		summation = int((firstBit^secondBit^carry) + '0')
 
 		result = char(summation) + result
@@ -42,15 +42,19 @@ def multiplySingleBit(a, b):
 
 def multiply(X, Y):
 	n = makeEqualLength(X, Y)
+	print(n)
 
 	if(n == 0): return 0
 	if(n == 1): return multiplySingleBit(X, Y)
 
-	fh = int(n/2)+1
-	sh = n - fh
+	fh = int(n/2)
+	print(fh)
+	sh = (n - fh)
 
 	Xl = X[:fh]
+	print(Xl)
 	Xr = X[fh:sh]
+	print(Xr)
 
 	Yl = Y[:fh]
 	Yr = Y[fh:sh]
